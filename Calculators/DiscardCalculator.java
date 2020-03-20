@@ -1,5 +1,8 @@
+package Calculators;
 import java.util.ArrayList;
 import java.util.List;
+
+import Cribbage.Card;
 
 
 public class DiscardCalculator extends Calculator {
@@ -11,6 +14,11 @@ public class DiscardCalculator extends Calculator {
 	
 	private ArrayList<Integer> discardList;
 	private ArrayList<Integer> remainingList;
+	
+	// Suppress instatntiability
+	private DiscardCalculator () {
+		throw new AssertionError();
+	}
 	
 	public DiscardCalculator (List <Card> in) {
 		this (in, false, false, 2);

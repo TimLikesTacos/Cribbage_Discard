@@ -1,5 +1,7 @@
+package Cribbage;
 
 import java.awt.GridBagConstraints;
+import java.util.Iterator;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,11 +39,14 @@ public class ManualMode extends DiscardGUI {
 		
 		// This will be used to create the menu to select cards.
 		Deck cards = new Deck ();
+		cards.buildNormal();
 		String [] cardString = new String [cards.size()];
-		for (int i = 0; i < cards.size(); ++i) {
-			cardString [i] = cards.at(i).toString();
-			
+		Iterator<Card> iter = cards.iterator();
+		int i = 0;
+		while (iter.hasNext()) {
+			cardString [i++] = iter.next().toString();
 		}
+
 		
 		card1Box = new JComboBox<>(cardString);
 		card1Box.setSelectedIndex(0);

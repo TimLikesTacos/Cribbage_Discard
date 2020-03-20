@@ -1,5 +1,8 @@
+package Cribbage;
 import java.util.ArrayList;
 import java.util.List;
+
+import Calculators.DiscardCalculator;
 
 
 /**
@@ -44,6 +47,7 @@ public abstract class Cribbage {
 			players = 2;
 		PLAYERS = players;
 		cards = new Deck ();
+		cards.buildNormal();
 		cards.shuffle (); // shuffles the deck
 		hand = new ArrayList <Card> ();
 		crib = new ArrayList <Card> ();

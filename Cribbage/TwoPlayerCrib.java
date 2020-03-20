@@ -1,3 +1,4 @@
+package Cribbage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,11 +27,11 @@ public class TwoPlayerCrib extends Cribbage{
 		{
 			if (i % 2 == 1) // deal to opponent
 			{
-				opp.add(new Card (cards.remove(0)));
+				opp.add(new Card (cards.removeFromTop()));
 			}
 			else // deal to hand
 			{
-				hand.add(new Card (cards.remove(0)));
+				hand.add(new Card (cards.removeFromTop()));
 			}
 		}
 	}
@@ -43,6 +44,7 @@ public class TwoPlayerCrib extends Cribbage{
 		opp.clear();
 		hand.clear ();
 		cards = new Deck ();
+		cards.buildNormal();
 		cards.shuffle();
 		deal ();
 	}

@@ -1,52 +1,49 @@
+package Cribbage;
 
 
 /**
  * This is the Card class.  It represents a single card in a standard playing deck.
  * @author Tim Reed 12/2019
+ * Updated:
+ * 		-removed member <code>int value</code> from class. This is part of the game, not of the card.
+ * 			Constructors and accessors and mutators have been changed to reflect this.
+ * 		-Cleaned up converter to get a numerical value of the facecard
+ * 		-Removed print method.  toString() completed requirement
+ * 		-Changed compareTo () to also compare suits.  This makes it consistant with equals().
  *
  */
 
-public class Card implements Comparable <Card>{
+public class Card implements Comparable {
 	
 	protected Suit suit;	// suit of the card. Heart, Diamond, Spade, Club.
 	protected String name;	// The actual character on the card, A, 2, 3,...., 10, J, Q, K.
-	protected int value;	// Value of the cards.  Aces are 1, facecards are 10.
 	
 	/**
 	 * Constructor
 	 * @param suit2 = suit of the card
 	 * @param n = name of the card
-	 * @param v = value of the card points-wise.
 	 */
 
-	Card (Suit suit2, String n, int v) {
+	public Card (Suit suit2, String n) {
 		suit = suit2;
 		name = n;
-		value = v;
 	}
 
 	/**
 	 * Construtor
 	 * @param c = Card to create.
 	 */
-	Card (Card c){
+	public Card (Card c){
 		suit = c.suit;
 		name = c.name;
-		value = c.value;
 	}
 	
 	/**
-	 * Default constructor.  Creates Ace of Hearts card with -1 value if no parameters are given
+	 * Default constructor.  Creates Ace of Hearts card when no parameters are given.
 	 */
-	Card () { this(Suit.HEART, "A", -1);}
+	public Card () { this(Suit.HEART, "A");}
 
-	/**
-	 * Outputs the card Suit and Face value.  Used for debugging.
-	 */
-	public void print () {
-		System.out.format("Card Suit: %s, Card Face: %s%n", suit, name);
-	}
-	
+
 	/**
 	 * Coverts to string.  Outputs the face value followed by the suit using unicode symbols
 	 */
@@ -61,11 +58,11 @@ public class Card implements Comparable <Card>{
 	 * @author Tim Reed 12/2019
 	 *
 	 */
-	enum Suit  {
+	public enum Suit  {
 		// values are unicode symbols.  Hearts and diamonds are white, others are black
+		SPADE (0x2660),
 		HEART (0x2661),
 		DIAMOND (0x2662),
-		SPADE (0x2660),
 		CLUB (0x2663);
 
 		private int s;
@@ -93,14 +90,7 @@ public class Card implements Comparable <Card>{
 				return false;
 		}
 	}
-	
-	/**
-	 * 
-	 * @return the value of the card. 1-10.  Facecards are 10, aces are 1.
-	 */
-	public int getValue () {
-		return value;
-	}
+
 	/**
 	 * 
 	 * @return Suit of the card
@@ -123,12 +113,8 @@ public class Card implements Comparable <Card>{
 	 */
 
 	public int getNameValue () {
-		return converter (name);
-	}
-
-	// Internal method to support other methods.
-	private int converter (String n) {
-		switch (n) {
+		
+		switch (name) {
 		case "A":
 			return 1;
 		case "J":
@@ -138,22 +124,52 @@ public class Card implements Comparable <Card>{
 		case "K":
 			return 13;
 		default:
-			return Integer.parseInt(n);
+			return Integer.parseInt(name);
 		}
 	}
+
 
 	/**
 	 * Compares this to another Card.
 	 * @param Card to compare this to.
 	 * @return -1 if this is less than parameter, 0 if equal, 1 if greater than.
 	 */
+	
 	@Override
-	public int compareTo (Card b) {
+	public boolean equals (Object b) {
+		if (this == b)
+			return true;
+		if (!(b instanceof Card))
+			return false;
+		Card card = (Card) b;
+		return (card.suit.equals(suit) && card.name.equals(name));	
+	}
+	
+	@Override
+	public int hashCode () {
+		int result = name.hashCode();
+		result = 31 * result + suit.getSuit() - 2659;
+		return result;
+	}
+	/**
+	 * Used to sort card.  Uses the value of the card, Aces are 1, Kings are 13.  
+	 * Suits are in the following order and are only considered if the face value 
+	 * is the same: Heart, Diamond, Spade, Club 
+	 */
+	
+	public int compareTo (Object b) {
 
 		if (b == null || this == null)
 			return 0;
-		int lhs = converter (getName());
-		int rhs = converter (b.getName());
+		if (!(b instanceof Card))
+			return 0;
+		Card bCard = (Card) b;
+		int lhs = getNameValue ();
+		int rhs = bCard.getNameValue();
+		if (lhs == rhs) {
+			return (this.suit.getSuit() < bCard.suit.getSuit()) ? -1 : 
+					(this.suit.getSuit() == bCard.suit.getSuit()) ? 0 : 1;
+		}
 		return (lhs < rhs) ?  -1 : (lhs == rhs) ? 0 : 1;
 	}
 	

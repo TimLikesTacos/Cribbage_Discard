@@ -1,3 +1,4 @@
+package Cribbage;
 
 import javax.swing.JFrame;
 import java.awt.GridBagLayout;
@@ -38,10 +39,10 @@ public class BaseGUI extends JFrame {
 		mode =  mo;
 		initialize();
 		if (mo.equals("Random")) {
-			discardGUI = new RandomMode(cribbage, this);
+			discardGUI = new ManualMode(cribbage, this);
 		}
 		else {
-			discardGUI = new ManualMode (cribbage, this);
+			discardGUI = new RandomMode (cribbage, this);
 		}
 
 	}

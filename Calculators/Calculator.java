@@ -1,4 +1,8 @@
+package Calculators;
 import java.util.List;
+
+import Cribbage.Card;
+
 import java.util.ArrayList;
 
 
@@ -16,13 +20,20 @@ public class Calculator implements CribbageCalc{
 	/**
 	 * Constructor.  Creates a copy of the hand passed into as parameter for use in calculations.
 	 * @param hand = Hand of cards to be used in calculations.
+	 * Establishes the cards in the hand, sets numCards to the number in the hand, and sets the current points to zero.
 	 */
-	Calculator (List <Card>hand){
+	protected Calculator () {}
+	public Calculator (List <Card>hand){
 		theHand = new ArrayList <Card> (hand);
 		numCards = theHand.size();
 		points = 0;
 	}
 	
+	/**
+	 * 
+	 * @return integer of number of cards in the hand.
+	 */
+	public int getNumCards () {return numCards;}
 	/**
 	 * @return points that have been calculated.
 	 */

@@ -1,5 +1,8 @@
+package Calculators;
 import java.util.ArrayList;
 import java.util.List;
+
+import Cribbage.Card;
 
 
 /**
@@ -69,27 +72,42 @@ public class FifteenCalculator extends Calculator {
 		int sum = 0;
 		for (int i = 0; i < involvedCards.size(); ++i)
 		{
-			sum = sum + theHand.get(involvedCards.get(i)).getValue();
+			sum = sum + getNumericValue(theHand.get(involvedCards.get(i)));
 		}
 		return sum;
-}
+	}
 	// internal method to increment or trim the last item in involvedCards
-		private void nextIteration () {
-			
-			int last = involvedCards.size()-1;
-			
-			// Increment value in last position by one.
-			involvedCards.set(last, involvedCards.get(last) + 1);
-			while (!involvedCards.isEmpty() && involvedCards.get(last) == numCards) {
-				// if last cards is equal to the max  number of cards, remove the last card and incrememnt the previous
-				involvedCards.remove(last);
-				if (involvedCards.isEmpty()) {
-					continue;
-				}
-				last = involvedCards.size() -1; // get the new size, which is one smaller than previously.
-				involvedCards.set(last, involvedCards.get(last) + 1); //Increment last card.  Repeat the while loop if needed.
+	private void nextIteration () {
+
+		int last = involvedCards.size()-1;
+
+		// Increment value in last position by one.
+		involvedCards.set(last, involvedCards.get(last) + 1);
+		while (!involvedCards.isEmpty() && involvedCards.get(last) == numCards) {
+			// if last cards is equal to the max  number of cards, remove the last card and incrememnt the previous
+			involvedCards.remove(last);
+			if (involvedCards.isEmpty()) {
+				continue;
 			}
-			
+			last = involvedCards.size() -1; // get the new size, which is one smaller than previously.
+			involvedCards.set(last, involvedCards.get(last) + 1); //Increment last card.  Repeat the while loop if needed.
 		}
+
+	}
+	
+	//internal method to get the numeric value for each card
+	private int getNumericValue (Card c) {
+		int value;
+		try {
+			 value = Integer.parseInt(c.getName());
+		}
+		catch (Exception e){ //parse will throw exception if not an integer character, i.e. facecards
+			if (c.getName().equals("A"))
+				value = 1; // aces are worth one
+			else
+				value = 10; //J, Q, K are 10.
+		}
+		return value;
+	}
 	
 }
