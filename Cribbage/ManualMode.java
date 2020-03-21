@@ -1,7 +1,10 @@
 package Cribbage;
 
 import java.awt.GridBagConstraints;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Vector;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,17 +43,18 @@ public class ManualMode extends DiscardGUI {
 		// This will be used to create the menu to select cards.
 		Deck cards = new Deck ();
 		cards.buildNormal();
-		String [] cardString = new String [cards.size()];
+//		String [] cardString = new String [cards.size()]; 
+		Vector <Card> cardsInDeck = new Vector <Card> ();
 		Iterator<Card> iter = cards.iterator();
-		int i = 0;
 		while (iter.hasNext()) {
-			cardString [i++] = iter.next().toString();
+			Card toAdd = new Card (iter.next());
+			cardsInDeck.add(toAdd); // adds cards to a vector that will be used for menus
 		}
 
 		
-		card1Box = new JComboBox<>(cardString);
+		card1Box = new JComboBox (cardsInDeck);
 		card1Box.setSelectedIndex(0);
-		cribbage.setHand(0, cards.at(card1Box.getSelectedIndex()));
+		cribbage.setHand(0, cardsInDeck.get(card1Box.getSelectedIndex()));
 		GridBagConstraints gbc_card1Box = new GridBagConstraints();
 		gbc_card1Box.insets = new Insets(0, 0, 5, 5);
 		gbc_card1Box.fill = GridBagConstraints.HORIZONTAL;
@@ -61,14 +65,14 @@ public class ManualMode extends DiscardGUI {
 		card1Box.addActionListener(new ActionListener () {
 			@Override
 			public void actionPerformed (ActionEvent e) {
-			cribbage.setHand(0, cards.at(card1Box.getSelectedIndex()));
+			cribbage.setHand(0, cardsInDeck.get(card1Box.getSelectedIndex()));
 			repaint ();
 			}
 		});
 		
-		card2Box = new JComboBox<>(cardString);
+		card2Box = new JComboBox (cardsInDeck);
 		card2Box.setSelectedIndex(1);
-		cribbage.setHand(1, cards.at(card2Box.getSelectedIndex()));
+		cribbage.setHand(1, cardsInDeck.get(card2Box.getSelectedIndex()));
 		GridBagConstraints gbc_card2Box = new GridBagConstraints();
 		gbc_card2Box.insets = new Insets(0, 0, 5, 5);
 		gbc_card2Box.fill = GridBagConstraints.HORIZONTAL;
@@ -79,15 +83,15 @@ public class ManualMode extends DiscardGUI {
 		card2Box.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				cribbage.setHand(1, cards.at(card2Box.getSelectedIndex()));
+				cribbage.setHand(1, cardsInDeck.get(card2Box.getSelectedIndex()));
 				repaint ();
 				
 			}
 		});
 		
-		card3Box = new JComboBox<>(cardString);
+		card3Box = new JComboBox(cardsInDeck);
 		card3Box.setSelectedIndex(2);
-		cribbage.setHand(2, cards.at(card3Box.getSelectedIndex()));
+		cribbage.setHand(2, cardsInDeck.get(card3Box.getSelectedIndex()));
 		GridBagConstraints gbc_card3Box = new GridBagConstraints();
 		gbc_card3Box.insets = new Insets(0, 0, 5, 5);
 		gbc_card3Box.fill = GridBagConstraints.HORIZONTAL;
@@ -98,14 +102,14 @@ public class ManualMode extends DiscardGUI {
 		card3Box.addActionListener(new ActionListener () {
 			@Override
 			public void actionPerformed (ActionEvent e) {
-			cribbage.setHand(2, cards.at(card3Box.getSelectedIndex()));
+			cribbage.setHand(2, cardsInDeck.get(card3Box.getSelectedIndex()));
 			repaint ();
 			}
 		});
 		
-		card4Box = new JComboBox<>(cardString);
+		card4Box = new JComboBox(cardsInDeck);
 		card4Box.setSelectedIndex(3);
-		cribbage.setHand(3, cards.at(card4Box.getSelectedIndex()));
+		cribbage.setHand(3, cardsInDeck.get(card4Box.getSelectedIndex()));
 		GridBagConstraints gbc_card4Box = new GridBagConstraints();
 		gbc_card4Box.insets = new Insets(0, 0, 5, 5);
 		gbc_card4Box.fill = GridBagConstraints.HORIZONTAL;
@@ -116,14 +120,14 @@ public class ManualMode extends DiscardGUI {
 		card4Box.addActionListener(new ActionListener () {
 			@Override
 			public void actionPerformed (ActionEvent e) {
-			cribbage.setHand(3, cards.at(card4Box.getSelectedIndex()));
+			cribbage.setHand(3, cardsInDeck.get(card4Box.getSelectedIndex()));
 			repaint ();
 			}
 		});
 		
-		card5Box = new JComboBox<>(cardString);
+		card5Box = new JComboBox(cardsInDeck);
 		card5Box.setSelectedIndex(4);
-		cribbage.setHand(4, cards.at(card5Box.getSelectedIndex()));
+		cribbage.setHand(4, cardsInDeck.get(card5Box.getSelectedIndex()));
 		GridBagConstraints gbc_card5Box = new GridBagConstraints();
 		gbc_card5Box.insets = new Insets(0, 0, 5, 5);
 		gbc_card5Box.fill = GridBagConstraints.HORIZONTAL;
@@ -134,14 +138,14 @@ public class ManualMode extends DiscardGUI {
 		card5Box.addActionListener(new ActionListener () {
 			@Override
 			public void actionPerformed (ActionEvent e) {
-			cribbage.setHand(4, cards.at(card5Box.getSelectedIndex()));
+			cribbage.setHand(4, cardsInDeck.get(card5Box.getSelectedIndex()));
 			repaint ();
 			}
 		});
 		
-		card6Box = new JComboBox<>(cardString);
+		card6Box = new JComboBox(cardsInDeck);
 		card6Box.setSelectedIndex(5);
-		cribbage.setHand(5, cards.at(card6Box.getSelectedIndex()));
+		cribbage.setHand(5, cardsInDeck.get(card6Box.getSelectedIndex()));
 		GridBagConstraints gbc_card6Box = new GridBagConstraints();
 		gbc_card6Box.insets = new Insets(0, 0, 5, 5);
 		gbc_card6Box.fill = GridBagConstraints.HORIZONTAL;
@@ -152,7 +156,7 @@ public class ManualMode extends DiscardGUI {
 		card6Box.addActionListener(new ActionListener () {
 			@Override
 			public void actionPerformed (ActionEvent e) {
-			cribbage.setHand(5, cards.at(card6Box.getSelectedIndex()));
+			cribbage.setHand(5, cardsInDeck.get(card6Box.getSelectedIndex()));
 			repaint ();
 			}
 		});

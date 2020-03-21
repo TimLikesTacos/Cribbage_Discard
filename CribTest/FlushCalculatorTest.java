@@ -3,6 +3,7 @@ import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.junit.Test;
 
@@ -43,20 +44,28 @@ public class FlushCalculatorTest {
 			assertThat (flushCalc, notNullValue());
 			int expected = 0;
 			if (hand.size ()>= 4) {
-				expected = hand.size();
+				expected = hand.size(); // hands is a collection of different hands of differnt amount of cards.
 			}
 			assertThat (flushCalc.getPoints(), is(expected));
 		}
-		FlushCalculator flushCalc = new FlushCalculator (hand);
+		
+		Deck deck = new Deck ();
+		deck.buildNormal();
+		ArrayList <Card> deckHand = new ArrayList <Card> ();
+		Iterator <Card> iter = deck.iterator();
+		while (iter.hasNext()) {
+			deckHand.add(iter.next()); // copy deck into arrayList.
+		}
+		FlushCalculator flushCalc = new FlushCalculator (deckHand);
 		/* 
 		 * The max number of points for a flush is 13, since it is not expected to play cribbage without
 		 * more than 13 points.  Since 4 cards are needed for a flush, it is not currently possible with
 		 * known rules for cribbage that eight or more cards are used.  Therefore it is not expected to 
 		 * need check for multiple flushes in a hand.
 		 */
-		assertEquals (13, flushCalc.getPoints());
+		assertThat (flushCalc.getPoints(), is (13));
 		
-		hand.clear();
+		ArrayList <Card> hand = new ArrayList <Card> ();
 		// The following will test a hand entirely of one suit.
 		for (int i = 0; i <= 52; ++i) { 
 			if (hand.size() % 13 == 0) {
@@ -69,7 +78,7 @@ public class FlushCalculatorTest {
 			else
 				assertEquals ("Flush",i % 13, flushCalc.getPoints());
 			
-			hand.add(normalDeck.at((i * 4) % 52));
+			hand.add(deckHand.get((i * 4) % 52));
 			
 		}
 		

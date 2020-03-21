@@ -39,10 +39,10 @@ public class BaseGUI extends JFrame {
 		mode =  mo;
 		initialize();
 		if (mo.equals("Random")) {
-			discardGUI = new ManualMode(cribbage, this);
+			discardGUI = new RandomMode(cribbage, this);
 		}
 		else {
-			discardGUI = new RandomMode (cribbage, this);
+			discardGUI = new ManualMode (cribbage, this);
 		}
 
 	}
