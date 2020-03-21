@@ -1,5 +1,6 @@
 package CribTest;
 import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.*;
 
 import java.util.ArrayList;
 
@@ -13,12 +14,39 @@ public class FlushCalculatorTest {
 
 	
 	Deck normalDeck = new Deck ();
-	ArrayList <Card> hand;
+	ArrayList <ArrayList<Card>> hands;
+	
+//	hands = new ArrayList<ArrayList<Card>> ();
+//	hands.add(handBuilder (new Integer [] {})); // empty set
+//	hands.add(handBuilder (new Integer [] {1, 2, 3, 4}));
+//	hands.add(handBuilder (new Integer [] {1, 2, 3, 4, 5, 6}));
+//	hands.add(handBuilder (new Integer [] {1, 1}));
+//	hands.add(handBuilder (new Integer [] {1, 2, 2, 1}));
+//	hands.add(handBuilder (new Integer [] {3, 3, 3, 1, 5}));
+//	hands.add(handBuilder (new Integer [] {4, 4, 4, 4, 6, 7}));
+//	hands.add(handBuilder (new Integer [] {1, 2, 3, 4, 5, 6}));
+//	hands.add(handBuilder (new Integer [] {1, 2, 3, 4, 6, 5}));
+//	hands.add(handBuilder (new Integer [] {10, 9, 8, 7, 6}));
+//	hands.add(handBuilder (new String [] {"K", "K", "Q", "J"}));
+//	hands.add(handBuilder (new String [] {"A", "K", "Q", "Q"}));
+//	hands.add(handBuilder (new String [] {"K", "A", "2", "3"}));
+//	hands.add(handBuilder (new String [] {"Q", "K", "A", "2"}));
+
 	
 	@Test
 	public void flushCalculator() {
-		hand = new ArrayList<Card> (normalDeck.getCards());
-		assertNotNull (hand);
+		hands = new TestHands().getHands();
+		assertNotNull (hands);
+		for (int i = 0; i < hands.size(); ++i) {
+			ArrayList<Card> hand = hands.get(i);
+			FlushCalculator flushCalc = new FlushCalculator (hand);
+			assertThat (flushCalc, notNullValue());
+			int expected = 0;
+			if (hand.size ()>= 4) {
+				expected = hand.size();
+			}
+			assertThat (flushCalc.getPoints(), is(expected));
+		}
 		FlushCalculator flushCalc = new FlushCalculator (hand);
 		/* 
 		 * The max number of points for a flush is 13, since it is not expected to play cribbage without

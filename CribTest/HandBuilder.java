@@ -24,11 +24,16 @@ public class HandBuilder {
 //		}
 //	}
 	
-	public HandBuilder(Object [] arr) {
+	public HandBuilder (Card.Suit suit, Object [] arr)
+	{
 		hand = new ArrayList<Card> ();
 		for (int i = 0; i < arr.length; ++i) {
 			hand.add(new Card (Card.Suit.HEART, arr[i].toString()));
 		}
+	}
+	
+	public HandBuilder(Object [] arr) {
+		this (Card.Suit.HEART, arr);
 	}
 
 }
