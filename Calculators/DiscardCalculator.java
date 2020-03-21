@@ -16,6 +16,7 @@ public class DiscardCalculator extends Calculator {
 	private ArrayList<Integer> remainingList;
 	
 	// Suppress instatntiability
+	@SuppressWarnings("unused")
 	private DiscardCalculator () {
 		throw new AssertionError();
 	}

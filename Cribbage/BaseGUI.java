@@ -14,8 +14,8 @@ public class BaseGUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private String mode;
-	private DiscardGUI discardGUI;
 	static Cribbage cribbage;
+	private DiscardGUI discardGUI;
 	private GridBagLayout gridBagLayout;
 
 	/**

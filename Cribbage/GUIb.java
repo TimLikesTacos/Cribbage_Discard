@@ -2,12 +2,9 @@ package Cribbage;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
+
 import javax.swing.JLabel;
-import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -18,8 +15,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.awt.event.ActionEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
+
 
 public class GUIb {
 

@@ -1,9 +1,7 @@
 package Cribbage;
 
 import java.awt.GridBagConstraints;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Vector;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;

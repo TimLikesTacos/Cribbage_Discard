@@ -13,7 +13,7 @@ package Cribbage;
  *
  */
 
-public class Card implements Comparable {
+public class Card implements Comparable<Card> {
 	
 	protected Suit suit;	// suit of the card. Heart, Diamond, Spade, Club.
 	protected String name;	// The actual character on the card, A, 2, 3,...., 10, J, Q, K.
@@ -157,7 +157,7 @@ public class Card implements Comparable {
 	 * is the same: Heart, Diamond, Spade, Club 
 	 */
 	
-	public int compareTo (Object b) {
+	public int compareTo (Card b) {
 
 		if (b == null || this == null)
 			return 0;
