@@ -23,5 +23,9 @@ public class HandBuilder {
 	public HandBuilder(Object [] arr) {
 		this (Card.Suit.HEART, arr);
 	}
+	
+	public ArrayList <Card>getHand () {
+		return hand;
+	}
 
 }

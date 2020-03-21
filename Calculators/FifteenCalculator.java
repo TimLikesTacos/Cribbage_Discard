@@ -34,6 +34,9 @@ public class FifteenCalculator extends Calculator {
 	@Override
 	public void calculate() {
 		
+		
+		if (theHand.size() ==0)
+			return; // prevents accessing array out of bounds.  no need to calculate points
 		// ensure invovledCards is empty
 		if (!involvedCards.isEmpty()) {
 			involvedCards.clear();
